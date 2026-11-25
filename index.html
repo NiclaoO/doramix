@@ -965,7 +965,7 @@ body.sticky-on .downloads-pill, body.sticky-on .social-toast { bottom: 74px; }
 .cat-card .body p { font-size: 14.5px; color: var(--text-dim); line-height: 1.55; }
 
 /* ============ PLANOS (design da LP original) ============ */
-.plans-sec { padding: 90px 0; text-align: center; }
+.plans-sec { padding: 90px 0; text-align: center; scroll-margin-top: 64px; }
 .plans-grid {
   margin-top: 54px; display: grid; grid-template-columns: 1fr; gap: 16px;
   text-align: left;
@@ -1461,6 +1461,64 @@ body.sticky-on .downloads-pill, body.sticky-on .social-toast { bottom: 74px; }
   .plan-amount { font-size: 46px; }
 }
 
+.plan-upsell[hidden] { display: none; }
+.plan-upsell {
+  position: fixed; inset: 0; z-index: 1000;
+  display: grid; place-items: center; padding: 18px;
+  background: rgba(0, 0, 0, .82); backdrop-filter: blur(4px);
+}
+.plan-upsell-dialog {
+  position: relative; width: min(100%, 480px); max-height: 90vh; overflow-y: auto;
+  padding: 30px 26px 26px; border: 2px solid #d83a9e; border-radius: 20px;
+  background: #1a1930; color: #f7f4fb; text-align: center;
+  box-shadow: 0 18px 70px rgba(216, 58, 158, .22);
+}
+.plan-upsell-close {
+  position: absolute; top: 10px; right: 12px; width: 36px; height: 36px;
+  border: 0; border-radius: 50%; background: transparent; color: #aaa5b7;
+  font: inherit; font-size: 26px; line-height: 1; cursor: pointer;
+}
+.plan-upsell-close:hover { color: #fff; background: rgba(255,255,255,.08); }
+.plan-upsell-badge {
+  display: inline-block; margin-bottom: 14px; padding: 8px 18px;
+  border-radius: 999px; background: #c83d94; color: #160b1c;
+  font-size: 12px; font-weight: 800; letter-spacing: .04em;
+}
+.plan-upsell-title { margin: 0; font-size: clamp(24px, 6vw, 30px); line-height: 1.2; }
+.plan-upsell-price {
+  display: block; margin-top: 8px; color: #d83a9e;
+  font-size: clamp(38px, 10vw, 48px); font-weight: 800; line-height: 1.1;
+}
+.plan-upsell-period { margin: 2px 0 18px; font-size: 16px; }
+.plan-upsell-features {
+  margin: 0 0 18px; padding: 16px 18px; border-radius: 14px;
+  background: #28273b; text-align: left; list-style: none;
+}
+.plan-upsell-features li { display: flex; align-items: flex-start; gap: 10px; padding: 5px 0; }
+.plan-upsell-features li::before {
+  content: "✓"; flex: 0 0 20px; width: 20px; height: 20px;
+  border-radius: 50%; background: #c83d94; color: #fff;
+  font-size: 13px; font-weight: 800; line-height: 20px; text-align: center;
+}
+.plan-upsell-primary, .plan-upsell-secondary {
+  display: block; width: 100%; padding: 14px 16px; border-radius: 12px;
+  font: inherit; font-weight: 800; text-align: center; text-decoration: none;
+  cursor: pointer;
+}
+.plan-upsell-primary { border: 0; background: #c83d94; color: #160b1c; }
+.plan-upsell-primary:hover { background: #dd55ad; }
+.plan-upsell-secondary {
+  margin-top: 10px; border: 1px solid #49465a; background: transparent;
+  color: #aaa5b7; font-size: 14px; font-weight: 500;
+}
+.plan-upsell-secondary:hover { border-color: #aaa5b7; color: #fff; }
+.plan-upsell :focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+body.plan-upsell-open { overflow: hidden; }
+@media (max-width: 420px) {
+  .plan-upsell-dialog { padding: 27px 18px 20px; }
+  .plan-upsell-features { padding: 14px; font-size: 14px; }
+}
+
 </style>
 </head>
 <body>
@@ -1762,6 +1820,26 @@ body.sticky-on .downloads-pill, body.sticky-on .social-toast { bottom: 74px; }
   <a href="#planos" class="btn-red">Assinar agora</a>
 </div>
 
+<!-- ANNUAL PLAN UPSELL -->
+<div class="plan-upsell" id="planUpsell" hidden>
+  <section class="plan-upsell-dialog" role="dialog" aria-modal="true" aria-labelledby="planUpsellTitle" aria-describedby="planUpsellPeriod">
+    <button class="plan-upsell-close" type="button" aria-label="Fechar oferta anual">&times;</button>
+    <span class="plan-upsell-badge">OFERTA ESPECIAL</span>
+    <h2 class="plan-upsell-title" id="planUpsellTitle">Leve o plano anual</h2>
+    <strong class="plan-upsell-price">R$ 10,00</strong>
+    <p class="plan-upsell-period" id="planUpsellPeriod">12 meses de acesso</p>
+    <ul class="plan-upsell-features">
+      <li>+40 mil doramas e novelas</li>
+      <li>Conteúdo legendado e dublado em PT</li>
+      <li>Novos episódios toda semana</li>
+      <li>3 telas · SD a 4K HDR</li>
+      <li>7 dias de garantia</li>
+    </ul>
+    <a class="plan-upsell-primary" href="https://pay.lowify.com.br/checkout?product_id=IoKdOJ" target="_blank" rel="noopener noreferrer">QUERO O ANUAL POR R$ 10,00</a>
+    <a class="plan-upsell-secondary" href="https://pay.lowify.com.br/checkout?product_id=8PEC40" target="_blank" rel="noopener noreferrer">Quero só o semanal por R$ 5,00</a>
+  </section>
+</div>
+
 <script>
 /* ===========================================================
    DORAMIX — runtime
@@ -1771,6 +1849,12 @@ body.sticky-on .downloads-pill, body.sticky-on .social-toast { bottom: 74px; }
 
   /* ---------- POSTERS (Em Alta Hoje) ---------- */
   const POSTERS = [
+    { src: 'assets/img/01-a-meia-irma-da-minha-namorada.webp', alt: 'A Meia-irmã da Minha Namorada' },
+    { src: 'assets/img/02-verdade-ou-desafio-com-a-minha-meia-irma.webp', alt: 'Verdade ou Desafio com a Minha Meia-irmã' },
+    { src: 'assets/img/03-um-quarto-com-a-mae-da-minha-noiva.webp', alt: 'Um Quarto com a Mãe da Minha Noiva' },
+    { src: 'assets/img/04-paraiso-cruel-obessesao-sombria.jpg', alt: 'Paraíso Cruel: Obsessão Sombria' },
+    { src: 'assets/img/05-o-melhor-presente-de-natal-foi-o-divorcio.jpg', alt: 'O Melhor Presente de Natal Foi o Divórcio' },
+    { src: 'assets/img/06-a-vinganca-do-bilionario-traido.jpg', alt: 'A Vingança do Bilionário Traído' },
     'assets/img/191358.jpg',
     'assets/img/1010852.jpg',
     'assets/img/1200243.jpg',
@@ -1796,12 +1880,15 @@ body.sticky-on .downloads-pill, body.sticky-on .social-toast { bottom: 74px; }
   function buildPosters() {
     const grid = document.getElementById('posterGrid');
     if (!grid) return;
-    POSTERS.forEach(src => {
+    POSTERS.forEach(item => {
+      const poster = typeof item === 'string'
+        ? { src: item, alt: 'Dorama em destaque' }
+        : item;
       const a = document.createElement('a');
       a.href = '#planos';
       a.className = 'poster';
       const img = document.createElement('img');
-      img.src = src; img.alt = 'Dorama em destaque'; img.loading = 'lazy';
+      img.src = poster.src; img.alt = poster.alt; img.loading = 'lazy';
       a.appendChild(img);
       grid.appendChild(a);
     });
@@ -1896,6 +1983,21 @@ body.sticky-on .downloads-pill, body.sticky-on .social-toast { bottom: 74px; }
     setInterval(show, 8000);
   }
 
+  /* ---------- Modo bio (?bio / ?ig / ?tt): cai direto nos planos ---------- */
+  function setupBioMode() {
+    const q = new URLSearchParams(location.search);
+    const keys = ['bio', 'ig', 'tt', 'tiktok', 'insta', 'reels'];
+    if (!keys.some(k => q.has(k))) return;
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    const plans = document.getElementById('planos');
+    if (!plans) return;
+    document.body.classList.add('bio-mode');
+    const go = () => plans.scrollIntoView({ block: 'start' });
+    requestAnimationFrame(() => requestAnimationFrame(go));
+    window.addEventListener('load', () => setTimeout(go, 80));
+    setTimeout(go, 400);
+  }
+
   /* ---------- Sticky CTA (esconde quando planos estão na tela) ---------- */
   function setupStickyCta() {
     const bar = document.getElementById('stickyCta');
@@ -1943,6 +2045,53 @@ body.sticky-on .downloads-pill, body.sticky-on .social-toast { bottom: 74px; }
     if (first) first.classList.add('open');
   }
 
+  function setupPlanUpsell() {
+    const modal = document.getElementById('planUpsell');
+    const weeklyPlanLink = document.querySelector('.plan.purple .plan-cta');
+    const closeButton = modal && modal.querySelector('.plan-upsell-close');
+    const dialog = modal && modal.querySelector('.plan-upsell-dialog');
+    if (!modal || !weeklyPlanLink || !closeButton || !dialog) return;
+
+    let trigger = null;
+    const close = () => {
+      modal.hidden = true;
+      document.body.classList.remove('plan-upsell-open');
+      if (trigger) trigger.focus();
+    };
+    const open = event => {
+      event.preventDefault();
+      trigger = event.currentTarget;
+      modal.hidden = false;
+      document.body.classList.add('plan-upsell-open');
+      closeButton.focus();
+    };
+
+    weeklyPlanLink.addEventListener('click', open);
+    closeButton.addEventListener('click', close);
+    modal.addEventListener('click', event => {
+      if (event.target === modal) close();
+    });
+    modal.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
+    dialog.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        close();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const focusable = Array.from(dialog.querySelectorAll('a[href], button:not([disabled])'));
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+  }
+
   function init() {
     buildPosters();
     buildHero();
@@ -1951,6 +2100,8 @@ body.sticky-on .downloads-pill, body.sticky-on .social-toast { bottom: 74px; }
     setupFaq();
     setupReveal();
     setupStickyCta();
+    setupBioMode();
+    setupPlanUpsell();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
