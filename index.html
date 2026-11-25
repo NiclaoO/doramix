@@ -1486,17 +1486,17 @@ body.sticky-on .downloads-pill, body.sticky-on .social-toast { bottom: 74px; }
   font-size: 14px; font-weight: 800;
 }
 .plan-upsell-title { margin: 0; font-size: clamp(21px, 3vw, 25px); line-height: 1.15; }
-.plan-upsell-intro { margin: 12px 0; font-size: 16px; font-weight: 700; line-height: 1.2; }
 .plan-upsell-price {
   display: block; margin-top: 10px; color: #e83da8;
   font-size: 28px; font-weight: 800; line-height: 1.1;
 }
 .plan-upsell-period { margin: 12px 0 2px; font-size: 18px; font-weight: 700; line-height: 1.2; }
-.plan-upsell-monthly { margin: 6px 0 14px; color: #c6bfd8; font-size: 13px; line-height: 1.2; }
-.plan-upsell-features {
+.plan-upsell-benefits {
   margin: 0 0 14px; padding: 12px 16px; border-radius: 15px;
   background: #29283d; text-align: left; list-style: none;
 }
+.plan-upsell-benefits-heading { margin: 6px 0 10px; font-size: 18px; line-height: 1.3; }
+.plan-upsell-features { margin: 0; padding: 0; list-style: none; }
 .plan-upsell-features li { display: flex; align-items: center; gap: 12px; min-height: 40px; }
 .plan-upsell-features li::before {
   content: "✓"; flex: 0 0 20px; width: 20px; height: 20px;
@@ -1522,7 +1522,9 @@ body.plan-upsell-open { overflow: hidden; }
 @media (max-width: 420px) {
   .plan-upsell { padding: 10px; }
   .plan-upsell-dialog { width: 100%; padding: 58px 12px 14px; }
-  .plan-upsell-features { padding: 10px 12px; font-size: 14px; }
+  .plan-upsell-benefits { padding: 10px 12px; }
+  .plan-upsell-benefits-heading { font-size: 16px; }
+  .plan-upsell-features { font-size: 14px; }
   .plan-upsell-features li { min-height: 40px; }
   .plan-upsell-primary { font-size: 16px; }
 }
@@ -1832,21 +1834,22 @@ body.plan-upsell-open { overflow: hidden; }
 <div class="plan-upsell" id="planUpsell" hidden>
   <section class="plan-upsell-dialog" role="dialog" aria-modal="true" aria-labelledby="planUpsellTitle" aria-describedby="planUpsellPeriod">
     <button class="plan-upsell-close" type="button" aria-label="Fechar oferta anual">&times;</button>
-    <span class="plan-upsell-badge">OFERTA ESPECIAL</span>
-    <h2 class="plan-upsell-title" id="planUpsellTitle">ESPERE! TEMOS UMA OFERTA PARA VOCÊ</h2>
-    <p class="plan-upsell-intro">Por apenas R$ 5 a mais...</p>
+    <span class="plan-upsell-badge">OFERTA VIP EXCLUSIVA</span>
+    <h2 class="plan-upsell-title" id="planUpsellTitle">Desbloqueie a experiência completa!</h2>
     <strong class="plan-upsell-price">R$ 10,00</strong>
-    <p class="plan-upsell-period" id="planUpsellPeriod">12 MESES DE ACESSO!</p>
-    <p class="plan-upsell-monthly">Em vez de pagar R$ 5 por apenas uma semana.</p>
-    <ul class="plan-upsell-features">
-      <li>+40 mil doramas e novelas</li>
-      <li>Conteúdo legendado e dublado em português</li>
-      <li>Novos episódios toda semana</li>
-      <li>3 telas simultâneas</li>
-      <li>Qualidade SD até 4K HDR</li>
-      <li>7 dias de garantia</li>
-    </ul>
-    <a class="plan-upsell-primary" href="https://pay.lowify.com.br/checkout?product_id=IoKdOJ" target="_blank" rel="noopener noreferrer"><span>SIM! QUERO 12 MESES POR R$ 10</span><small>Aproveitar minha oferta especial</small></a>
+    <p class="plan-upsell-period" id="planUpsellPeriod">12 meses de acesso</p>
+    <div class="plan-upsell-benefits">
+      <h3 class="plan-upsell-benefits-heading">Tudo do plano semanal, MAIS:</h3>
+      <ul class="plan-upsell-features">
+        <li>12 meses sem precisar renovar toda semana</li>
+        <li>Acesso antecipado a novos episódios</li>
+        <li>Coleções VIP e listas exclusivas</li>
+        <li>Favoritos e histórico de episódios</li>
+        <li>Sem anúncios, se tecnicamente disponível</li>
+        <li>7 dias de garantia</li>
+      </ul>
+    </div>
+    <a class="plan-upsell-primary" href="https://pay.lowify.com.br/checkout?product_id=IoKdOJ" target="_blank" rel="noopener noreferrer"><span>QUERO MEU ACESSO VIP</span><small>12 meses por apenas R$ 10,00</small></a>
     <a class="plan-upsell-secondary" href="https://pay.lowify.com.br/checkout?product_id=8PEC40" target="_blank" rel="noopener noreferrer">Não, prefiro continuar com o semanal de R$ 5</a>
     <p class="plan-upsell-guarantee">7 dias de garantia conforme as condições da oferta</p>
   </section>
